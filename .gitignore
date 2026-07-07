@@ -1,29 +1,26 @@
-# to sync with .dockerignore & pyrightconfig.json
-
+# Python
 *.pyc
 */*.pyc
 *~
 *.swp
-geckodriver.log
-
-.coverage
-coverage/
-
-.govm/
-.nvm/
-cache/
-build/
-dist/
-local/
-gh-pages/
+__pycache__/
 *.egg-info/
+.venv/
+venv/
 
-/package-lock.json
-/node_modules/
+# Node (编译前端时)
+node_modules/
+package-lock.json
 
+# 编辑器
 .idea/
+.vscode/
+*.swp
 
-searx/version_frozen.py
-.dir-locals.el
+# 日志和临时
+*.log
+.cache/
 
-.python-version
+# 静态资源调试文件
+*.min.js.map
+*.min.css.map

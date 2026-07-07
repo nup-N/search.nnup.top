@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  searxng:
+    build: .
+    container_name: nnup-search
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./searx/settings.yml:/app/searx/settings.yml:ro
+    environment:
+      - SEARXNG_SETTINGS=/app/searx/settings.yml
+    restart: unless-stopped

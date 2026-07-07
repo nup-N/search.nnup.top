@@ -2,7 +2,7 @@ general:
   # Debug mode, only for development. Is overwritten by ${SEARXNG_DEBUG}
   debug: false
   # displayed name
-  instance_name: "SearXNG"
+  instance_name: "nnup Search"
   # For example: https://example.com/privacy
   privacypolicy_url: false
   # use true to use your own donation page written in searx/info/en/donate.md
@@ -18,24 +18,20 @@ general:
   open_metrics: ''
 
 brand:
-  docs_url: https://docs.searxng.org/
-  public_instances: https://searx.space
-  wiki_url: https://github.com/searxng/searxng/wiki
-  issue_url: https://github.com/searxng/searxng/issues
-  # custom:
-  #   # Custom entries in the footer: [title]: [link]
-  #   links:
-  #     Uptime: https://uptime.searxng.org/history/darmarit-org
-  #     About: "https://searxng.org"
-  # pwa_colors:
-  #   # Custom settings for PWA icon an colors used in manifest.json
-  #   # Default colors are:
-  #    theme_color_light: "#3050ff"
-  #    background_color_light: "fff"
-  #    theme_color_dark: "#58f"
-  #    background_color_dark: "#222428"
-  #    theme_color_black: "#3050ff"
-  #    background_color_black: "#000"
+  docs_url: https://search.nnup.top
+  public_instances: https://search.nnup.top
+  wiki_url: https://search.nnup.top
+  issue_url: https://github.com/nup-N/search.nnup.top/issues
+  custom:
+    links:
+      About: https://search.nnup.top/about
+  pwa_colors:
+    theme_color_light: "#3050ff"
+    background_color_light: "fff"
+    theme_color_dark: "#58f"
+    background_color_dark: "#222428"
+    theme_color_black: "#3050ff"
+    background_color_black: "#000"
 
 search:
   # Filter results. 0: None, 1: Moderate, 2: Strict
