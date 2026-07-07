@@ -33,10 +33,7 @@ install uninstall:
 PHONY += clean
 clean: py.clean docs.clean node.clean nvm.clean go.clean test.clean
 	$(Q)./manage build_msg CLEAN  "common files"
-	$(Q)find . -name '*.orig' -exec rm -f {} +
-	$(Q)find . -name '*.rej' -exec rm -f {} +
-	$(Q)find . -name '*~' -exec rm -f {} +
-	$(Q)find . -name '*.bak' -exec rm -f {} +
+	$(Q)find . \( -name '*.orig' -o -name '*.rej' -o -name '*~' -o -name '*.bak' \) -exec rm -f {} +
 
 
 PHONY += test ci.test test.shell

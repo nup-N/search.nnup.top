@@ -106,7 +106,7 @@ class ResultContainer:
 
             else:
                 result["engine"] = result.get("engine") or engine_name or ""
-                result = LegacyResult(result)  # for backward compatibility, will be romeved one day
+                result = LegacyResult(result)  # for backward compatibility, will be removed one day
                 result.normalize_result_fields()
 
                 if "suggestion" in result:

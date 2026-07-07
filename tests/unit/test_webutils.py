@@ -11,17 +11,6 @@ class TestWebUtils(SearxTestCase):
 
     @parameterized.expand(
         [
-            ('https://searx.me/', 'https://searx.me/'),
-            ('https://searx.me/ű', 'https://searx.me/ű'),
-            ('https://searx.me/' + (100 * 'a'), 'https://searx.me/[...]aaaaaaaaaaaaaaaaa'),
-            ('https://searx.me/' + (100 * 'ű'), 'https://searx.me/[...]űűűűűűűűűűűűűűűűű'),
-        ]
-    )
-    def test_prettify_url(self, test_url: str, expected: str):
-        self.assertEqual(webutils.prettify_url(test_url, max_length=32), expected)
-
-    @parameterized.expand(
-        [
             (0, None, None),
             (None, None, None),
             ('', None, None),

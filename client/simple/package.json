@@ -13,7 +13,7 @@
     "fix": "npm run fix:stylelint && npm run fix:biome && npm run fix:package",
     "fix:biome": "biome check --write",
     "fix:package": "sort-package-json --quiet",
-    "fix:stylelint": "stylelint --fix strict 'src/**/*.{scss,sass,less,styl}'",
+    "fix:stylelint": "stylelint --fix strict 'src/**/*.less'",
     "lint": "npm run lint:biome && npm run lint:tsc",
     "lint:biome": "biome lint",
     "lint:tsc": "tsc --noEmit"

@@ -200,14 +200,14 @@ SCHEMA: dict[str, t.Any] = {
         'ban_time_on_fail': SettingsValue(numbers.Real, 5),
         'max_ban_time_on_fail': SettingsValue(numbers.Real, 120),
         'suspended_times': {
-            'SearxEngineAccessDenied': SettingsValue(numbers.Real, 86400),
-            'SearxEngineCaptcha': SettingsValue(numbers.Real, 86400),
-            'SearxEngineTooManyRequests': SettingsValue(numbers.Real, 3600),
+            'SearxEngineAccessDenied': SettingsValue(numbers.Real, 180),
+            'SearxEngineCaptcha': SettingsValue(numbers.Real, 3600),
+            'SearxEngineTooManyRequests': SettingsValue(numbers.Real, 180),
             'cf_SearxEngineCaptcha': SettingsValue(numbers.Real, 1296000),
             'cf_SearxEngineAccessDenied': SettingsValue(numbers.Real, 86400),
             'recaptcha_SearxEngineCaptcha': SettingsValue(numbers.Real, 604800),
         },
-        'formats': SettingsValue(list, OUTPUT_FORMATS),
+        'formats': SettingsValue(list, ['html']),
         'max_page': SettingsValue(int, 0),
     },
     'server': {
@@ -253,7 +253,7 @@ SCHEMA: dict[str, t.Any] = {
         'verify': SettingsValue((bool, str), True),
         'max_request_timeout': SettingsValue((None, numbers.Real), None),
         'pool_connections': SettingsValue(int, 100),
-        'pool_maxsize': SettingsValue(int, 10),
+        'pool_maxsize': SettingsValue(int, 20),
         'keepalive_expiry': SettingsValue(numbers.Real, 5.0),
         # default maximum redirect
         # from https://github.com/psf/requests/blob/8c211a96cdbe9fe320d63d9e1ae15c5c07e179f8/requests/models.py#L55

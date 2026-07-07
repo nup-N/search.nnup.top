@@ -17,7 +17,7 @@ from io import StringIO
 from codecs import getincrementalencoder
 
 import msgspec
-from flask_babel import gettext, format_date  # type: ignore
+from flask_babel import gettext  # type: ignore
 
 from searx import logger, get_setting
 
@@ -62,8 +62,7 @@ exception_classname_to_text = {
     'KeyError': parsing_error_text,
     'json.decoder.JSONDecodeError': parsing_error_text,
     'lxml.etree.ParserError': parsing_error_text,
-    'ssl.SSLCertVerificationError': ssl_cert_error_text,  # for Python > 3.7
-    'ssl.CertificateError': ssl_cert_error_text,  # for Python 3.7
+    'ssl.SSLCertVerificationError': ssl_cert_error_text,
 }
 
 
@@ -217,13 +216,6 @@ def is_hmac_of(secret_key, value, hmac_to_check):
     return len(hmac_of_value) == len(hmac_to_check) and hmac.compare_digest(hmac_of_value, hmac_to_check)
 
 
-def prettify_url(url, max_length=74):
-    if len(url) > max_length:
-        chunk_len = int(max_length / 2 + 1)
-        return '{0}[...]{1}'.format(url[:chunk_len], url[-chunk_len:])
-    return url
-
-
 def contains_cjko(s: str) -> bool:
     """This function check whether or not a string contains Chinese, Japanese,
     or Korean characters. It employs regex and uses the u escape sequence to
@@ -285,28 +277,6 @@ def highlight_content(content, query):
         regex = re.compile("|".join(map(regex_highlight_cjk, queries)))
         return regex.sub(lambda match: f'<span class="highlight">{match.group(0)}</span>'.replace('\\', r'\\'), content)
     return content
-
-
-def searxng_l10n_timespan(dt: datetime) -> str:  # pylint: disable=invalid-name
-    """Returns a human-readable and translated string indicating how long ago
-    a date was in the past / the time span of the date to the present.
-
-    On January 1st, midnight, the returned string only indicates how many years
-    ago the date was.
-    """
-    # TODO, check if timezone is calculated right  # pylint: disable=fixme
-    d = dt.date()
-    t = dt.time()
-    if d.month == 1 and d.day == 1 and t.hour == 0 and t.minute == 0 and t.second == 0:
-        return str(d.year)
-    if dt.replace(tzinfo=None) >= datetime.now() - timedelta(days=1):
-        timedifference = datetime.now() - dt.replace(tzinfo=None)
-        minutes = int((timedifference.seconds / 60) % 60)
-        hours = int(timedifference.seconds / 60 / 60)
-        if hours == 0:
-            return gettext('{minutes} minute(s) ago').format(minutes=minutes)
-        return gettext('{hours} hour(s), {minutes} minute(s) ago').format(hours=hours, minutes=minutes)
-    return format_date(dt)
 
 
 NO_SUBGROUPING = 'without further subgrouping'

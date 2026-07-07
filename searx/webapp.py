@@ -11,9 +11,8 @@ import base64
 from timeit import default_timer
 from html import escape
 from io import StringIO
-import typing
+from typing import Iterable
 
-import urllib
 import urllib.parse
 from urllib.parse import urlencode, urlparse, unquote
 
@@ -331,7 +330,7 @@ def get_translations():
     }
 
 
-def get_enabled_categories(category_names: typing.Iterable[str]):
+def get_enabled_categories(category_names: Iterable[str]):
     """The categories in ``category_names```for which there is no active engine
     are filtered out and a reduced list is returned."""
 

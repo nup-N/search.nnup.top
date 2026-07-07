@@ -132,11 +132,6 @@ class HTMLTextExtractor(HTMLParser):
     def get_text(self):
         return ''.join(self.result).strip()
 
-    def error(self, message: str) -> None:
-        # error handle is needed in <py3.10
-        # https://github.com/python/cpython/pull/8562/files
-        raise AssertionError(message)
-
 
 def html_to_text(html_str: str) -> str:
     """Extract text from a HTML string
@@ -345,28 +340,24 @@ def dict_subset(dictionary: MutableMapping[t.Any, t.Any], properties: set[str]) 
     return {k: dictionary[k] for k in properties if k in dictionary}
 
 
+def _humanize(size: int | float, base: int, units: list[str], precision: int, separator: str) -> str:
+    """Common implementation for humanize_bytes and humanize_number."""
+    x = len(units)
+    p = 0
+    while size > base and p < x:
+        p += 1
+        size = size / float(base)
+    return "%.*f%s%s" % (precision, size, separator, units[p])
+
+
 def humanize_bytes(size: int | float, precision: int = 2):
     """Determine the *human readable* value of bytes on 1024 base (1KB=1024B)."""
-    s = ['B ', 'KB', 'MB', 'GB', 'TB']
-
-    x = len(s)
-    p = 0
-    while size > 1024 and p < x:
-        p += 1
-        size = size / 1024.0
-    return "%.*f %s" % (precision, size, s[p])
+    return _humanize(size, 1024, ['B ', 'KB', 'MB', 'GB', 'TB'], precision, ' ')
 
 
 def humanize_number(size: int | float, precision: int = 0):
     """Determine the *human readable* value of a decimal number."""
-    s = ['', 'K', 'M', 'B', 'T']
-
-    x = len(s)
-    p = 0
-    while size > 1000 and p < x:
-        p += 1
-        size = size / 1000.0
-    return "%.*f%s" % (precision, size, s[p])
+    return _humanize(size, 1000, ['', 'K', 'M', 'B', 'T'], precision, '')
 
 
 def convert_str_to_int(number_str: str) -> int:
