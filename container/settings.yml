@@ -1,0 +1,35 @@
+# search.nnup.top - SearXNG settings
+# https://docs.searxng.org/admin/settings/
+
+use_default_settings: true
+
+general:
+  instance_name: "search.nnup.top"
+
+server:
+  # Generate a secret key with: openssl rand -hex 32
+  secret_key: "REPLACE_ME"
+  bind_address: "0.0.0.0"
+  port: 8081
+  image_proxy: true
+  limiter: false
+  public_instance: false
+
+search:
+  safe_search: 0
+  autocomplete: ""
+  formats:
+    - html
+    - json
+
+ui:
+  static_use_hash: true
+  default_locale: "zh-Hans-CN"
+
+outgoing:
+  request_timeout: 10.0
+  max_request_timeout: 15.0
+  # Uncomment if behind a proxy (e.g. Clash in China):
+  # proxies:
+  #   all://:
+  #     - http://host.docker.internal:7890
